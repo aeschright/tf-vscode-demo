@@ -1,0 +1,86 @@
+{
+  "name": "tf-vscode-demo",
+  "version": "0.0.1",
+  "description": "A demo plugin for Terraform VSCode integration",
+  "author": "Audrey Eschright",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aeschright/tf-vscode-demo/issues"
+  },
+  "homepage": "https://github.com/aeschright/tf-vscode-demo#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aeschright/tf-vscode-demo.git"
+  },
+  "keywords": [
+    "Terraform",
+    "VSCode"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "terraform",
+        "aliases": [
+          "Terraform",
+          "terraform"
+        ],
+        "extensions": [
+          ".tf",
+          ".tfvars"
+        ],
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "json",
+        "extensions": [
+          ".tfstate"
+        ]
+      }
+    ],
+    "configuration": {
+			"type": "object",
+			"title": "Example configuration",
+			"properties": {
+				"languageServerExample.maxNumberOfProblems": {
+					"scope": "resource",
+					"type": "number",
+					"default": 100,
+					"description": "Controls the maximum number of problems produced by the server."
+				},
+				"languageServerExample.trace.server": {
+					"scope": "window",
+					"type": "string",
+					"enum": [
+						"off",
+						"messages",
+						"verbose"
+					],
+					"default": "off",
+					"description": "Traces the communication between VS Code and the language server."
+				}
+      }
+    }
+  },
+  "engines": {
+		"vscode": "^1.33.0"
+	},
+  "activationEvents": [
+    "onLanguage:terraform",
+    "onView:terraform-modules",
+    "workspaceContains:**/*.tf"
+  ],
+  "main": "./client/out/extension",
+  "scripts": {
+    "vscode:prepublish": "cd client && npm run update-vscode && cd .. && npm run compile",
+    "compile": "tsc -b",
+    "watch": "tsc -b -w",
+    "postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
+    "test": "sh ./scripts/e2e.sh"
+  },
+  "devDependencies": {
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.11.7",
+    "tslint": "^5.16.0",
+    "typescript": "^3.6.4"
+  }
+}
