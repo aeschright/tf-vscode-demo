@@ -11,6 +11,15 @@
 			"include": "#comments"
 		},
 		{
+			"include": "#attribute_definition"
+		},
+		{
+			"include": "#imports"
+		},
+		{
+			"include": "#block"
+		},
+		{
 			"include": "#expressions"
 		}
 	],
@@ -74,6 +83,25 @@
 				}
 			},
 			"end": "\\*/"
+		},
+		"attribute_definition": {
+			"match": "(\\()?((?!null|false|true)[[:alpha:]][[:alnum:]_-]*)(\\))?\\s*(\\=[^\\=|\\>])\\s*",
+			"comment": "Identifier \"=\" with optional parens",
+			"name": "variable.declaration.terraform",
+			"captures": {
+				"1": {
+					"name": "punctuation.section.parens.begin.terraform"
+				},
+				"2": {
+					"name": "variable.other.readwrite.terraform"
+				},
+				"3": {
+					"name": "punctuation.section.parens.end.terraform"
+				},
+				"4": {
+					"name": "keyword.operator.assignment.terraform"
+				}
+			}
 		},
 		"expressions": {
 			"patterns": [
