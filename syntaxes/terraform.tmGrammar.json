@@ -14,9 +14,6 @@
 			"include": "#attribute_definition"
 		},
 		{
-			"include": "#imports"
-		},
-		{
 			"include": "#block"
 		},
 		{
@@ -102,6 +99,39 @@
 					"name": "keyword.operator.assignment.terraform"
 				}
 			}
+		},
+		"block": {
+			"name": "meta.block.terraform",
+			"begin": "\\b((resource|provider|variable|output|locals|module|data|terraform)|((?!null|false|true)[[:alpha:]][[:alnum:]_-]*))\\b(?=[\\s\\\"\\-[:word:]]*(\\{))",
+			"beginCaptures": {
+				"2": {
+					"name": "meta.type.terraform storage.type.terraform"
+				},
+				"3": {
+					"name": "meta.type.terraform entity.name.type.terraform"
+				},
+				"4": {
+					"patterns": [
+						{
+							"include": "#string_literals"
+						}
+					]
+				},
+				"5": {
+					"name": "punctuation.section.block.begin.terraform"
+				}
+			},
+			"end": "\\}",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.section.block.end.terraform"
+				}
+			},
+			"patterns": [
+				{
+					"include": "$self"
+				}
+			]
 		},
 		"expressions": {
 			"patterns": [
