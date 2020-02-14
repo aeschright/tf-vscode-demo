@@ -41,13 +41,10 @@
 			"comment": "Constant values available only to Terraform.",
 			"name": "support.constant.terraform"
 		},
-		"terraform_known_blocks": {
-			"match": "resource|provider|variable|output|locals|module|data|terraform"
-		},
 		"terraform_type_keywords": {
-			"match": "any|string|number|bool",
-			"name": "storage.type.terraform",
-			"comment": "Type keywords known to Terraform."
+			"match": "\\b(any|string|number|bool)\\b",
+			"comment": "Type keywords known to Terraform.",
+			"name": "storage.type.terraform"
 		},
 		"comments": {
 			"patterns": [
@@ -102,22 +99,29 @@
 		},
 		"block": {
 			"name": "meta.block.terraform",
-			"begin": "\\b((resource|provider|variable|output|locals|module|data|terraform)|((?!null|false|true)[[:alpha:]][[:alnum:]_-]*))\\b(?=[\\s\\\"\\-[:word:]]*(\\{))",
+			"begin": "(\\w+)(?:([\\s\\\"\\-[:word:]]*)(\\{))",
 			"beginCaptures": {
+				"1": {
+					"patterns": [
+						{
+							"match": "resource|provider|variable|output|locals|module|data|terraform",
+							"name": "storage.type.terraform"
+						},
+						{
+							"match": "\\b(?!null|false|true)[[:alpha:]][[:alnum:]_-]*\\b",
+							"comment": "Identifer label",
+							"name": "entity.name.label.terraform"
+						}
+					]
+				},
 				"2": {
-					"name": "meta.type.terraform storage.type.terraform"
-				},
-				"3": {
-					"name": "meta.type.terraform entity.name.type.terraform"
-				},
-				"4": {
 					"patterns": [
 						{
 							"include": "#string_literals"
 						}
 					]
 				},
-				"5": {
+				"3": {
 					"name": "punctuation.section.block.begin.terraform"
 				}
 			},
@@ -129,7 +133,16 @@
 			},
 			"patterns": [
 				{
-					"include": "$self"
+					"include": "#comments"
+				},
+				{
+					"include": "#attribute_definition"
+				},
+				{
+					"include": "#block"
+				},
+				{
+					"include": "#expressions"
 				}
 			]
 		},
