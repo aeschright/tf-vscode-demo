@@ -46,8 +46,28 @@
     ],
     "configuration": {
       "type": "object",
-      "title": "Example configuration",
+      "title": "Demo configuration",
       "properties": {
+        "languageServerExample.external": {
+          "scope": "resource",
+          "type": "boolean",
+          "default": false,
+          "description": "Whether an external language server binary should be launched."
+        },
+        "languageServerExample.pathToBinary": {
+          "scope": "resource",
+          "type": "string",
+          "default": "terraform-ls",
+          "description": "Path to language server binary"
+        },
+        "languageServerExample.args": {
+          "scope": "resource",
+          "type": "array",
+          "default": [
+            "serve"
+          ],
+          "description": "Arguments to pass to language server binary"
+        },
         "languageServerExample.maxNumberOfProblems": {
           "scope": "resource",
           "type": "number",
