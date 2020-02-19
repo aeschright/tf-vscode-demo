@@ -18,7 +18,7 @@ The syntax highlighting is adapted from https://github.com/alexlouden/Terraform.
   - Internal Language Server
     - select `Attach to Server`
   - External Language Server
-    - Press the :cog: to get into settings (also `Cmd+,` on Mac)
+    - Press the :cog: to get into settings (also `Cmd,` on Mac)
     - Go to `Extensions` -> `Demo configuration`
     - Tick _Language Server Example: External_ box
     - (modify settings if your path or args differ from default ones)
