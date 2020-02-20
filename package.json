@@ -16,6 +16,9 @@
     "Terraform",
     "VSCode"
   ],
+  "categories": [
+    "Snippets"
+  ],
   "contributes": {
     "languages": [
       {
@@ -42,6 +45,12 @@
         "language": "terraform",
         "scopeName": "scope.terraform",
         "path": "./syntaxes/terraform.tmGrammar.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "terraform",
+        "path": "./snippets/terraform.json"
       }
     ],
     "configuration": {

@@ -1,0 +1,68 @@
+{
+	"Provider": {
+		"prefix": "provider",
+		"body": [
+			"provider \"${1:name}\" {",
+			"\t$2",
+			"}"
+		]
+	},
+	"Resource": {
+		"prefix": "resource",
+		"body": [
+			"resource \"${1:type}\" \"${2:name}\" {",
+			"\t$3",
+			"}"
+		]
+	},
+	"Data": {
+		"prefix": "data",
+		"body": [
+			"data \"${1:type}\" \"${2:name}\" {",
+			"\t$3",
+			"}"			
+		]
+	},
+	"Module": {
+		"prefix": "module",
+		"body": [
+			"module \"${1:name}\" {",
+			"\tsource = \"$2\"",
+			"\t$3",
+			"}"
+		]
+	},
+	"Output": {
+		"prefix": "output",
+		"body": [
+			"output \"${1:name}\" {",
+			"\tvalue = \"$2\"",
+			"}"
+			
+		]
+	},
+	"Empty variable": {
+		"prefix": "vare",
+		"body": [
+			"variable \"${1:name}\" {",
+			"\ttype = \"${2|string,number,bool|}\"",
+			"\t${3:description = \"${4:(optional) describe your variable}\"}",
+			"}"
+		],
+		"description": "Variable (empty)"
+	},
+	"Map variable": {
+		"prefix": "varm",
+		"body": [
+			"variable \"${1:name}\" {",
+			"\ttype = \"map\"",
+			"\t${2:description = \"${3:(optional) describe your variable}\"}",
+			"\tdefault = {",
+			"\t\t${4:key1} = \"${5:val1}\"",
+			"\t\t${6:key2} = \"${7:val2}\"",
+			"\t}",
+			"}"
+		],
+		"description": "Variable (map)"
+	}
+}
