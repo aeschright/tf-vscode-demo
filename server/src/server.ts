@@ -9,7 +9,8 @@ import {
 	DidChangeConfigurationNotification,
 	CompletionItem,
 	CompletionItemKind,
-	TextDocumentPositionParams
+	TextDocumentPositionParams,
+	InsertTextFormat
 } from 'vscode-languageserver';
 
 // Create a connection for the server. The connection uses Node's IPC as a transport.
@@ -178,24 +179,11 @@ connection.onCompletion(
 		// info and always provide the same completion items.
 		return [
 			{
-				label: 'resource',
+				label: 'aws',
 				kind: CompletionItemKind.Text,
-				data: 1
-			},
-			{
-				label: 'data',
-				kind: CompletionItemKind.Text,
-				data: 2
-			},
-			{
-				label: 'variable',
-				kind: CompletionItemKind.Text,
-				data: 3
-			},
-			{
-				label: 'module',
-				kind: CompletionItemKind.Text,
-				data: 4
+				data: 1,
+				insertTextFormat: InsertTextFormat.Snippet,
+				insertText: 'provider "aws" {\n\tregion = "${1|us-west-2,us-east-1,us-gov-west-1|}"\n}'
 			}
 		];
 	}
@@ -206,17 +194,8 @@ connection.onCompletion(
 connection.onCompletionResolve(
 	(item: CompletionItem): CompletionItem => {
 		if (item.data === 1) {
-			item.detail = 'Resource';
-			item.documentation = 'A block that describes one or more infrastructure objects. Resources can be things like virtual networks, compute instances, or higher-level components such as DNS records.';
-		} else if (item.data === 2) {
-			item.detail = 'Data source';
-			item.documentation = 'A resource-like object that can be configured in Terraform\'s configuration language.';
-		} else if (item.data === 3) {
-			item.detail = 'Variable';
-			item.documentation = 'In Terraform, "variables" almost always refers to input variables, which are key/value pairs used in a run. Terraform modules can declare variables to allow customization. For child modules, the parent module provides a value when calling the module; for the root module, values are provided at run time.';
-		} else if (item.data === 4) {
-			item.detail = 'Module';
-			item.documentation = 'A self-contained collection of Terraform configurations that manages a collection of related infrastructure resources.';
+			item.detail = 'AWS Provider';
+			item.documentation = 'The Amazon Web Services (AWS) provider is used to interact with the many resources supported by AWS.';
 		}
 		return item;
 	}
